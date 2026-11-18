@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Agent Center concept | Mutual of Enumclaw</title>
+<meta name="description" content="Working concept of a redesigned agent portal for Mutual of Enumclaw.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@400;600;700&family=Source+Serif+4:opsz,wght@8..60,600&display=swap">
+<link rel="stylesheet" href="assets/css/app.css">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<div class="concept-bar" role="note">Concept demo with fictional data. Nothing here connects to MOE systems. <button type="button" id="reset-demo" class="linklike">Reset demo</button></div>
+<header class="topbar">
+  <div class="wrap topbar-inner">
+    <a href="#/today" class="brand"><img src="assets/img/moe-logo-white.png" alt="Mutual of Enumclaw" width="150" height="34"><span>Agent Center</span></a>
+    <div class="search" role="search">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg>
+      <label for="global-search" class="sr-only">Search members, policies, quotes and claims</label>
+      <input id="global-search" type="search" autocomplete="off" placeholder="Search members, policies, quotes, claims" aria-controls="search-results" aria-expanded="false">
+      <kbd>/</kbd>
+      <ul id="search-results" class="search-results" role="listbox" hidden></ul>
+    </div>
+    <div class="user">
+      <button type="button" class="iconbtn" id="bell" aria-label="Notifications"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"/><path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"/></svg><span class="dot" id="bell-count"></span></button>
+      <span class="avatar" id="avatar"></span>
+      <div class="user-meta"><div id="agent-name"></div><div id="agent-agency" class="muted-on-green"></div></div>
+    </div>
+  </div>
+</header>
+<nav class="mainnav" aria-label="Primary">
+  <div class="wrap mainnav-inner">
+    <a href="#/today" data-nav="today">Today</a>
+    <a href="#/book" data-nav="book">Book of business</a>
+    <a href="#/submit" data-nav="submit">Quote and submit</a>
+    <a href="#/change" data-nav="change">Service and billing</a>
+    <a href="#/claims" data-nav="claims">Claims</a>
+    <a href="#/performance" data-nav="performance">Agency performance</a>
+    <a href="#/resources" data-nav="resources">Resources</a>
+    <a href="#/ask" data-nav="ask">Ask MOE</a>
+  </div>
+</nav>
+<main id="main" class="wrap" tabindex="-1"></main>
+<footer class="wrap footer">
+  <span>Agent Center concept, Mutual of Enumclaw engineering.</span>
+  <a href="architecture/phase-1.html">Architecture, phase 1</a>
+  <a href="architecture/phase-2.html">Architecture, phase 2</a>
+</footer>
+<div id="modal-root"></div>
+<div id="toast" class="toast" role="status" aria-live="polite"></div>
+<script src="assets/js/data.js"></script>
+<script src="assets/js/resources.js"></script>
+<script src="assets/js/app.js"></script>
+</body>
+</html>
