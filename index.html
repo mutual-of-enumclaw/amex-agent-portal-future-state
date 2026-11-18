@@ -145,6 +145,7 @@ textarea { padding: 10px 12px; min-height: 96px; resize: vertical; }
 
 /* Metrics */
 .metric { background: var(--bg); border-radius: var(--r); padding: 16px; }
+.metric.on-page { background: var(--white); border: 1px solid var(--line); }
 .metric .v { font-size: 30px; font-weight: 700; color: var(--green); line-height: 1.2; }
 .money { font-size: 28px; font-weight: 700; color: var(--green); }
 
@@ -281,10 +282,10 @@ window.MEMBERS = [
     email: 'maria.alvarez@example.com', contact: 'Maria', paperless: true, easyPay: false,
     alert: { kind: 'lapse', text: 'Personal Auto payment is past due. A cancellation notice was sent Nov 14. Coverage cancels Nov 28 unless the past-due amount is received.' },
     policies: [
-      { id: 'HO-2210-4471', name: "Member's Best Package, Home", line: 'Home', term: 'Mar 2026 to Mar 2027', premium: 2140, status: 'Active' },
-      { id: 'PA-8834-1190', name: 'Personal Auto, 2 vehicles', line: 'Auto', term: 'Jun 2026 to Dec 2026', premium: 1688, status: 'Pending cancel',
+      { id: 'HO-2210-4471', name: "Member's Best Package, Home", category: 'Personal', line: 'Home', term: 'Mar 2026 to Mar 2027', premium: 2140, status: 'Active' },
+      { id: 'PA-8834-1190', name: 'Personal Auto, 2 vehicles', category: 'Personal', line: 'Auto', term: 'Jun 2026 to Dec 2026', premium: 1688, status: 'Pending cancel',
         vehicles: [{ year: 2021, make: 'Subaru', model: 'Outback' }, { year: 2017, make: 'Ford', model: 'F-150' }] },
-      { id: 'PEL-5521-0083', name: 'Personal Excess Liability, $1M', line: 'Excess', term: 'Mar 2026 to Mar 2027', premium: 312, status: 'Active' }
+      { id: 'PEL-5521-0083', name: 'Personal Excess Liability, $1M', category: 'Personal', line: 'Excess', term: 'Mar 2026 to Mar 2027', premium: 312, status: 'Active' }
     ],
     billing: { pastDue: 281.33, nextBill: 140.67, nextDue: 'Dec 14', plan: 'Monthly, account bill', lastPayment: 'Sep 28' },
     claims: [{ id: 'CL-26-118204', title: 'Vehicle damage, 2021 Subaru Outback', reported: 'Nov 10', adjuster: 'Dana Whitfield', stage: 1,
@@ -305,7 +306,7 @@ window.MEMBERS = [
     id: 'nguyen', name: 'Nguyen, Thanh', since: 2026, city: 'Boise, ID', phone: '(208) 555-0177', email: 'thanh.nguyen@example.com',
     contact: 'Thanh', paperless: false, easyPay: true,
     alert: { kind: 'info', text: 'Homeowners application is waiting on the member\u2019s e-signature (sent 6 days ago).' },
-    policies: [{ id: 'Q-HO-77120', name: 'Homeowners (quote, pending signature)', line: 'Home', term: 'Starts Dec 1, 2026', premium: 1475, status: 'Pending signature' }],
+    policies: [{ id: 'Q-HO-77120', name: 'Homeowners (quote, pending signature)', category: 'Personal', line: 'Home', term: 'Starts Dec 1, 2026', premium: 1475, status: 'Pending signature' }],
     billing: { pastDue: 0, nextBill: 122.92, nextDue: 'Dec 1', plan: 'Monthly, Easy Pay', lastPayment: 'None yet' },
     claims: [], documents: [{ title: 'Homeowners application', date: 'Nov 12' }],
     activity: [{ date: 'Nov 12', text: 'E-signature request sent from MOEQuote' }], starters: ['No auto policy with MOE']
@@ -313,8 +314,9 @@ window.MEMBERS = [
   {
     id: 'patel', name: 'Patel, Rohan and Anika', since: 2019, city: 'Bend, OR', phone: '(541) 555-0109', email: 'rpatel@example.com',
     contact: 'Rohan', paperless: true, easyPay: true, alert: null,
-    policies: [{ id: 'PA-6012-3381', name: 'Personal Auto, 3 vehicles', line: 'Auto', term: 'Feb 2026 to Feb 2027', premium: 2410, status: 'Active',
-      vehicles: [{ year: 2022, make: 'Honda', model: 'Pilot' }, { year: 2019, make: 'Toyota', model: 'Camry' }, { year: 2023, make: 'Tesla', model: 'Model 3' }] }],
+    policies: [{ id: 'PA-6012-3381', name: 'Personal Auto, 3 vehicles', category: 'Personal', line: 'Auto', term: 'Feb 2026 to Feb 2027', premium: 2410, status: 'Active',
+      vehicles: [{ year: 2022, make: 'Honda', model: 'Pilot' }, { year: 2019, make: 'Toyota', model: 'Camry' }, { year: 2023, make: 'Tesla', model: 'Model 3' }] },
+      { id: 'BOP-4410-2071', name: 'Businessowners, dental office', category: 'Commercial', line: 'BOP', term: 'Jan 2026 to Jan 2027', premium: 2860, status: 'Active' }],
     billing: { pastDue: 0, nextBill: 200.83, nextDue: 'Dec 5', plan: 'Monthly, Easy Pay', lastPayment: 'Nov 5' },
     claims: [], documents: [{ title: 'Auto declarations', date: 'Feb 01' }],
     activity: [{ date: 'Nov 15', text: "Member's Best package quote started (home and auto)" }],
@@ -324,7 +326,7 @@ window.MEMBERS = [
     id: 'cedar-ridge', name: 'Cedar Ridge Orchards', since: 2011, city: 'Wenatchee, WA', phone: '(509) 555-0188', email: 'office@cedarridge.example',
     contact: 'Ellen', paperless: true, easyPay: false, commercial: true,
     alert: { kind: 'info', text: 'Underwriting requested the vineyard questionnaire for the new farm submission.' },
-    policies: [{ id: 'FO-1180-2290', name: 'Farmowners, orchard operations', line: 'Farm', term: 'Apr 2026 to Apr 2027', premium: 9840, status: 'Active' }],
+    policies: [{ id: 'FO-1180-2290', name: 'Farmowners, orchard operations', category: 'Farm', line: 'Farm', term: 'Apr 2026 to Apr 2027', premium: 9840, status: 'Active' }],
     billing: { pastDue: 0, nextBill: 820, nextDue: 'Dec 10', plan: 'Monthly, account bill', lastPayment: 'Nov 10' },
     claims: [], documents: [{ title: 'Farm declarations', date: 'Apr 01' }],
     activity: [{ date: 'Nov 13', text: 'Underwriting requested more information on farm new business' }], starters: ['No commercial auto with MOE']
@@ -333,14 +335,67 @@ window.MEMBERS = [
     id: 'okafor', name: 'Okafor, Chidi', since: 2021, city: 'Missoula, MT', phone: '(406) 555-0121', email: 'chidi.okafor@example.com',
     contact: 'Chidi', paperless: true, easyPay: true, alert: null,
     policies: [
-      { id: 'HO-3391-0055', name: 'Traditional Homeowners', line: 'Home', term: 'Jul 2026 to Jul 2027', premium: 1320, status: 'Active' },
-      { id: 'BT-0042-7781', name: 'Boatowner, 18 ft runabout', line: 'Boat', term: 'May 2026 to May 2027', premium: 295, status: 'Active' }
+      { id: 'HO-3391-0055', name: 'Traditional Homeowners', category: 'Personal', line: 'Home', term: 'Jul 2026 to Jul 2027', premium: 1320, status: 'Active' },
+      { id: 'BT-0042-7781', name: 'Boatowner, 18 ft runabout', category: 'Personal', line: 'Boat', term: 'May 2026 to May 2027', premium: 295, status: 'Active' }
     ],
     billing: { pastDue: 0, nextBill: 134.58, nextDue: 'Dec 7', plan: 'Monthly, Easy Pay', lastPayment: 'Nov 7' },
     claims: [{ id: 'CL-26-097731', title: 'Hail damage to roof', reported: 'Aug 22', adjuster: 'Marcus Lee', stage: 3,
       stages: ['Reported', 'Adjuster assigned', 'Inspection', 'Paid Oct 3'] }],
     documents: [{ title: 'Claim payment letter', date: 'Oct 03' }],
     activity: [{ date: 'Oct 03', text: 'Hail claim paid and closed' }], starters: ['No auto policy with MOE']
+  }
+  ,
+  {
+    id: 'two-rivers', name: 'Two Rivers Brewing', since: 2022, city: 'Bend, OR', phone: '(541) 555-0163', email: 'ops@tworivers.example',
+    contact: 'Sam', paperless: true, easyPay: true, alert: { kind: 'info', text: 'New business submission for the taproom expansion is in underwriting review.' },
+    policies: [
+      { id: 'BOP-7781-0412', name: 'Businessowners, brewery and taproom', category: 'Commercial', line: 'BOP', term: 'May 2026 to May 2027', premium: 6420, status: 'Active' },
+      { id: 'CA-2290-1185', name: 'Commercial Auto, 2 delivery vans', category: 'Commercial', line: 'Commercial Auto', term: 'May 2026 to May 2027', premium: 3180, status: 'Active' },
+      { id: 'LL-0457-3320', name: 'Liquor Liability', category: 'Commercial', line: 'Liquor', term: 'May 2026 to May 2027', premium: 1950, status: 'Active' }
+    ],
+    billing: { pastDue: 0, nextBill: 962.5, nextDue: 'Dec 15', plan: 'Monthly, Easy Pay', lastPayment: 'Nov 15' },
+    claims: [], documents: [{ title: 'Liquor liability declarations', date: 'May 01' }],
+    activity: [{ date: 'Nov 12', text: 'Commercial new business submitted for taproom expansion' }],
+    starters: ['No commercial umbrella with MOE', 'Craft Brewery Enhancement endorsement not on the BOP']
+  },
+  {
+    id: 'summit-hardware', name: 'Summit Hardware and Supply', since: 2018, city: 'Kalispell, MT', phone: '(406) 555-0190', email: 'accounts@summithardware.example',
+    contact: 'Dana', paperless: false, easyPay: false, alert: null,
+    policies: [
+      { id: 'CPP-3305-8812', name: 'Commercial Package, retail store', category: 'Commercial', line: 'Package', term: 'Aug 2026 to Aug 2027', premium: 8240, status: 'Active' },
+      { id: 'CU-1149-0076', name: 'Commercial Umbrella, $2M', category: 'Commercial', line: 'Umbrella', term: 'Aug 2026 to Aug 2027', premium: 1400, status: 'Active' }
+    ],
+    billing: { pastDue: 0, nextBill: 803.33, nextDue: 'Dec 20', plan: 'Monthly, account bill', lastPayment: 'Nov 18' },
+    claims: [{ id: 'CL-26-104455', title: 'Customer slip and fall', reported: 'Sep 30', adjuster: 'Priya Nair', stage: 2, stages: ['Reported', 'Adjuster assigned', 'Investigation', 'Resolution'] }],
+    documents: [{ title: 'Commercial package declarations', date: 'Aug 01' }],
+    activity: [{ date: 'Oct 21', text: 'Liability claim moved to investigation' }],
+    starters: ['Cyber and Data Breach Liability not on the account']
+  },
+  {
+    id: 'valley-grain', name: 'Valley Grain Co.', since: 2016, city: 'Pendleton, OR', phone: '(541) 555-0134', email: 'office@valleygrain.example',
+    contact: 'Rick', paperless: true, easyPay: true, alert: null,
+    policies: [
+      { id: 'FO-6620-4471', name: 'Farmowners, grain operations', category: 'Farm', line: 'Farm', term: 'Mar 2026 to Mar 2027', premium: 12600, status: 'Active' },
+      { id: 'FA-0981-2234', name: 'Farm Auto, 4 vehicles', category: 'Farm', line: 'Farm Auto', term: 'Mar 2026 to Mar 2027', premium: 4890, status: 'Active' },
+      { id: 'FU-3378-0019', name: 'Farm Umbrella, $1M', category: 'Farm', line: 'Umbrella', term: 'Mar 2026 to Mar 2027', premium: 1100, status: 'Active' }
+    ],
+    billing: { pastDue: 0, nextBill: 1549.17, nextDue: 'Dec 3', plan: 'Monthly, Easy Pay', lastPayment: 'Nov 3' },
+    claims: [], documents: [{ title: 'Farm endorsement quote', date: 'Nov 14' }],
+    activity: [{ date: 'Nov 14', text: 'Farm endorsement quoted: added grain dryer' }],
+    starters: ['Farm Equipment Breakdown coverage not on the policy']
+  },
+  {
+    id: 'high-desert', name: 'High Desert Ranch', since: 2009, city: 'Ellensburg, WA', phone: '(509) 555-0115', email: 'hdranch@example.com',
+    contact: 'Lena', paperless: false, easyPay: false,
+    alert: { kind: 'lapse', text: 'Farmowners installment is past due. A cancellation notice was sent Nov 16. Coverage cancels Dec 1 unless the past-due amount is received.' },
+    policies: [
+      { id: 'FO-2208-9930', name: 'Farmowners, cattle ranch', category: 'Farm', line: 'Farm', term: 'Jan 2026 to Jan 2027', premium: 9370, status: 'Pending cancel' },
+      { id: 'HO-5530-1102', name: 'Traditional Homeowners, ranch house', category: 'Personal', line: 'Home', term: 'Jan 2026 to Jan 2027', premium: 1610, status: 'Active' }
+    ],
+    billing: { pastDue: 780.83, nextBill: 780.83, nextDue: 'Dec 16', plan: 'Monthly, account bill', lastPayment: 'Sep 16' },
+    claims: [], documents: [{ title: 'Farmowners cancellation notice', date: 'Nov 16' }],
+    activity: [{ date: 'Nov 16', text: 'Cancellation notice sent for Farmowners (non payment)' }],
+    starters: ['Ranchers Program enhancement not on the policy']
   }
 ];
 
@@ -351,6 +406,7 @@ window.QUEUE = [
   { id: 'q4', cat: 'Quotes', label: 'Quote', tone: 'green', title: 'Quote expires in 3 days', member: 'patel', detail: "Member's Best package, home and auto", action: 'quote' },
   { id: 'q5', cat: 'Claims', label: 'Claim', tone: 'plum', title: 'Adjuster assigned and inspection scheduled', member: 'alvarez', detail: 'Vehicle damage claim', action: 'claim' },
   { id: 'q6', cat: 'Billing', label: 'Billing', tone: 'red', title: 'Easy Pay draft returned', member: 'okafor', detail: 'Homeowners, bank account closed', action: 'member' },
+  { id: 'q8', cat: 'Billing', label: 'Lapse risk', tone: 'red', title: 'Payment past due, cancellation notice sent', member: 'high-desert', detail: 'Farmowners, cancels Dec 1', action: 'paylink' },
   { id: 'q7', cat: 'Quotes', label: 'Quote', tone: 'green', title: 'Renewal premium up 14 percent', member: 'okafor', detail: 'Traditional Homeowners renews Jul 2027', action: 'member' }
 ];
 
@@ -373,11 +429,11 @@ window.APPETITE_SAMPLE = [
     forms: ['Hotel/Motel Questionnaire - CML304 1119'] },
   { keys: ['apartment', 'habitational', 'rental units'], cls: 'Habitational', line: 'Commercial', guide: 'Commercial Appetite Guide',
     forms: ['Habitational Supplemental Questionnaire - CML306 0521', 'Older Building Questionnaire - CML311 0820'] },
-  { keys: ['orchard', 'fruit'], cls: 'Orchard operations', line: 'Farm', guide: 'Farm and Ranch Appetite Guide',
+  { keys: ['orchard', 'fruit'], cls: 'Orchard operations', category: 'Farm', line: 'Farm', guide: 'Farm and Ranch Appetite Guide',
     forms: ['Farmowner Orchard Vineyard and Winery Supplemental Questionnaire - FO306 1119'] },
-  { keys: ['hay'], cls: 'Hay operations', line: 'Farm', guide: 'Farm and Ranch Appetite Guide', forms: ['Farm Hay Supplemental Questionnaire - FO301 1119'] },
-  { keys: ['horse', 'equine', 'stable'], cls: 'Equine', line: 'Farm', guide: 'Farm and Ranch Appetite Guide', forms: ['Farm Equine Supplemental Questionnaire FO309 0421'] },
-  { keys: ['agritourism', 'pumpkin', 'corn maze', 'u-pick'], cls: 'Agritourism', line: 'Farm', guide: 'Farm and Ranch Appetite Guide',
+  { keys: ['hay'], cls: 'Hay operations', category: 'Farm', line: 'Farm', guide: 'Farm and Ranch Appetite Guide', forms: ['Farm Hay Supplemental Questionnaire - FO301 1119'] },
+  { keys: ['horse', 'equine', 'stable'], cls: 'Equine', category: 'Farm', line: 'Farm', guide: 'Farm and Ranch Appetite Guide', forms: ['Farm Equine Supplemental Questionnaire FO309 0421'] },
+  { keys: ['agritourism', 'pumpkin', 'corn maze', 'u-pick'], cls: 'Agritourism', category: 'Farm', line: 'Farm', guide: 'Farm and Ranch Appetite Guide',
     forms: ['Farmowner Agritourism Supplemental Questionnaire - FO305 1119'] },
   { keys: ['convenience', 'gas station', 'c-store'], cls: 'Convenience store', line: 'Commercial', guide: 'Commercial Appetite Guide',
     forms: ['Convenience Store Questionnaire - CML314 0121'] }
@@ -2163,24 +2219,84 @@ window.RESOURCES = [
     $all('[data-done]').forEach(function (b) { b.addEventListener('click', function () { S.queue.forEach(function (q) { if (q.id === b.dataset.done) q.done = true; }); save(); toast('Marked done.'); render(); }); });
   };
 
+  var CATS = [
+    { id: 'all', label: 'All lines', match: null },
+    { id: 'personal', label: 'Personal Lines', match: 'Personal' },
+    { id: 'commercial', label: 'Commercial', match: 'Commercial' },
+    { id: 'farm', label: 'Farm', match: 'Farm' }
+  ];
+  var CAT_TONE = { Personal: 'green', Commercial: 'blue', Farm: 'orange' };
+  var CAT_LABEL = { Personal: 'Personal Lines', Commercial: 'Commercial', Farm: 'Farm' };
+  function memberFlags(m, pols) {
+    var flags = [];
+    if (m.billing.pastDue && pols.some(function (p) { return p.status === 'Pending cancel'; })) flags.push('<span class="tag red">Past due</span>');
+    else if (m.billing.pastDue && !pols.length) flags.push('<span class="tag red">Past due</span>');
+    if (pols.some(function (p) { return p.status === 'Pending signature'; })) flags.push('<span class="tag orange">Signature pending</span>');
+    if (m.claims.some(function (c) { return c.stage < c.stages.length - 1; })) flags.push('<span class="tag plum">Open claim</span>');
+    if (m.alert && m.alert.kind === 'info' && !flags.length) flags.push('<span class="tag blue">Update</span>');
+    return flags;
+  }
   views.book = function (params) {
+    var cat = CATS.filter(function (c) { return c.id === params.cat; })[0] || CATS[0];
     var q = (params.q || '').toLowerCase();
-    var rows = S.members.filter(function (m) { return !q || (m.name + ' ' + m.city + ' ' + m.policies.map(function (p) { return p.id + ' ' + p.name; }).join(' ')).toLowerCase().indexOf(q) > -1; })
-      .map(function (m) {
-        var flags = [];
-        if (m.billing.pastDue) flags.push('<span class="tag red">Past due</span>');
-        if (m.policies.some(function (p) { return p.status === 'Pending signature'; })) flags.push('<span class="tag orange">Signature pending</span>');
-        if (m.claims.some(function (c) { return c.stage < c.stages.length - 1; })) flags.push('<span class="tag plum">Open claim</span>');
-        return '<tr><td><a href="#/member/' + m.id + '" class="titleline">' + esc(m.name) + '</a><div class="small muted">' + esc(m.city) + '</div></td>' +
-          '<td>' + m.policies.map(function (p) { return esc(p.name); }).join('<br>') + '</td><td>' + (flags.join(' ') || '<span class="muted">None</span>') + '</td>' +
-          '<td style="text-align:right"><a class="btn sm secondary" href="#/member/' + m.id + '">Open</a></td></tr>';
-      }).join('');
-    main.innerHTML = '<div class="pagehead"><div><h1>Book of business</h1><p class="lede">Every household and business you write with MOE, whatever system holds the policy.</p></div></div>' +
-      '<div class="field" style="max-width:520px"><label for="book-q">Filter by name, city or policy number</label><input id="book-q" type="text" value="' + esc(params.q || '') + '"></div>' +
-      '<section class="card"><div class="tablewrap"><table><thead><tr><th scope="col">Member</th><th scope="col">Policies</th><th scope="col">Needs attention</th><th scope="col"><span class="sr-only">Actions</span></th></tr></thead><tbody>' +
-      (rows || '<tr><td colspan="4" class="empty">No members match. Try a last name or policy number.</td></tr>') + '</tbody></table></div></section>';
+    var sort = params.sort || 'name';
+    function inCat(p) { return !cat.match || p.category === cat.match; }
+    // Accounts that hold at least one policy in the selected category
+    var accounts = S.members.map(function (m) { return { m: m, pols: m.policies.filter(inCat) }; })
+      .filter(function (x) { return x.pols.length; });
+    var counts = {};
+    CATS.forEach(function (c) { counts[c.id] = S.members.filter(function (m) { return m.policies.some(function (p) { return !c.match || p.category === c.match; }); }).length; });
+    var polCount = accounts.reduce(function (n, x) { return n + x.pols.length; }, 0);
+    var premium = accounts.reduce(function (n, x) { return n + x.pols.reduce(function (s, p) { return s + p.premium; }, 0); }, 0);
+    var attention = accounts.filter(function (x) { return memberFlags(x.m, x.pols).length; }).length;
+    var shown = accounts.filter(function (x) {
+      return !q || (x.m.name + ' ' + x.m.city + ' ' + x.pols.map(function (p) { return p.id + ' ' + p.name; }).join(' ')).toLowerCase().indexOf(q) > -1;
+    });
+    shown.sort(function (a, b) {
+      if (sort === 'premium') return b.pols.reduce(function (s, p) { return s + p.premium; }, 0) - a.pols.reduce(function (s, p) { return s + p.premium; }, 0);
+      if (sort === 'attention') return memberFlags(b.m, b.pols).length - memberFlags(a.m, a.pols).length || a.m.name.localeCompare(b.m.name);
+      return a.m.name.localeCompare(b.m.name);
+    });
+    var rows = shown.map(function (x) {
+      var m = x.m, flags = memberFlags(m, x.pols);
+      var cats = {}; m.policies.forEach(function (p) { cats[p.category] = true; });
+      var catTags = Object.keys(cats).map(function (c) { return '<span class="tag ' + CAT_TONE[c] + '">' + CAT_LABEL[c] + '</span>'; }).join(' ');
+      var prem = x.pols.reduce(function (s, p) { return s + p.premium; }, 0);
+      return '<tr><td><a href="#/member/' + m.id + '" class="titleline">' + esc(m.name) + '</a><div class="small muted">' + esc(m.city) + ', since ' + m.since + '</div></td>' +
+        '<td><div class="row" style="gap:6px">' + catTags + '</div></td>' +
+        '<td>' + x.pols.map(function (p) { return esc(p.name) + ' <span class="small muted">' + esc(p.id) + '</span>'; }).join('<br>') + '</td>' +
+        '<td style="white-space:nowrap">' + money(prem) + '</td>' +
+        '<td>' + (flags.join(' ') || '<span class="muted">None</span>') + '</td>' +
+        '<td style="text-align:right"><a class="btn sm secondary" href="#/member/' + m.id + '" aria-label="Open ' + esc(m.name) + '">Open</a></td></tr>';
+    }).join('');
+    function link(over) {
+      var p = { cat: cat.id, q: params.q || '', sort: sort }; for (var k in over) p[k] = over[k];
+      var qs = []; if (p.cat !== 'all') qs.push('cat=' + p.cat); if (p.q) qs.push('q=' + encodeURIComponent(p.q)); if (p.sort !== 'name') qs.push('sort=' + p.sort);
+      return '#/book' + (qs.length ? '?' + qs.join('&') : '');
+    }
+    var nouns = { all: 'accounts', personal: 'households', commercial: 'businesses', farm: 'farms and ranches' };
+    main.innerHTML = '<div class="pagehead"><div><h1>Book of business</h1><p class="lede">Every household, business and farm you write with MOE, whatever system holds the policy.</p></div>' +
+      '<a class="btn secondary" href="' + (cat.id === 'personal' ? '#/submit?type=personal' : '#/submit') + '">' + (cat.id === 'personal' ? 'Start a personal lines quote' : cat.id === 'all' ? 'Start a quote or submission' : 'Start a ' + cat.label.toLowerCase() + ' submission') + '</a></div>' +
+      '<div class="tabs" role="tablist" aria-label="Line of business">' + CATS.map(function (c) {
+        return '<button type="button" role="tab" aria-selected="' + (c.id === cat.id) + '" data-cat="' + c.id + '">' + c.label + ' <span class="muted" style="font-weight:400">' + counts[c.id] + '</span></button>'; }).join('') + '</div>' +
+      '<div role="tabpanel" style="display:flex;flex-direction:column;gap:20px">' +
+      '<div class="grid4"><div class="metric on-page"><div class="small muted">' + { all: 'Accounts', personal: 'Households', commercial: 'Businesses', farm: 'Farms and ranches' }[cat.id] + '</div><div class="v">' + accounts.length + '</div></div>' +
+      '<div class="metric on-page"><div class="small muted">Policies in force</div><div class="v">' + polCount + '</div></div>' +
+      '<div class="metric on-page"><div class="small muted">Annual premium</div><div class="v">' + money(premium).replace(/\.\d\d$/, '') + '</div></div>' +
+      '<div class="metric on-page"><div class="small muted">Need attention</div><div class="v">' + attention + '</div></div></div>' +
+      '<div class="row" style="justify-content:space-between;align-items:flex-end">' +
+      '<div class="field" style="flex:1 1 320px;max-width:520px"><label for="book-q">Filter by name, city or policy number</label><input id="book-q" type="text" value="' + esc(params.q || '') + '"></div>' +
+      '<div class="field"><label for="book-sort">Sort by</label><select id="book-sort"><option value="name"' + (sort === 'name' ? ' selected' : '') + '>Name</option><option value="premium"' + (sort === 'premium' ? ' selected' : '') + '>Premium, highest first</option><option value="attention"' + (sort === 'attention' ? ' selected' : '') + '>Needs attention first</option></select></div></div>' +
+      '<section class="card"><div class="tablewrap"><table><thead><tr><th scope="col">Account</th><th scope="col">Lines</th><th scope="col">' + (cat.id === 'all' ? 'Policies' : cat.label + ' policies') + '</th><th scope="col">Premium</th><th scope="col">Needs attention</th><th scope="col"><span class="sr-only">Actions</span></th></tr></thead><tbody>' +
+      (rows || '<tr><td colspan="6" class="empty">No ' + nouns[cat.id] + ' match. Try a name, city or policy number.</td></tr>') + '</tbody></table></div></section>' +
+      '<p class="small muted">Premium shows ' + (cat.id === 'all' ? 'all policies on each account' : 'only the ' + cat.label + ' policies on each account') + '. Sample data.</p></div>';
+    $all('[data-cat]').forEach(function (b) { b.addEventListener('click', function () { go(link({ cat: b.dataset.cat }), true); }); });
+    $('#book-sort').addEventListener('change', function () { go(link({ sort: this.value }), true); });
     var input = $('#book-q');
-    input.addEventListener('input', function () { history.replaceState(null, '', '#/book' + (input.value ? '?q=' + encodeURIComponent(input.value) : '')); var pos = input.selectionStart; render(); var i = $('#book-q'); i.focus(); i.setSelectionRange(pos, pos); });
+    input.addEventListener('input', function () {
+      history.replaceState(null, '', link({ q: input.value })); var pos = input.selectionStart; render();
+      var i = $('#book-q'); i.focus(); i.setSelectionRange(pos, pos);
+    });
   };
 
   views.member = function (params, id) {
@@ -2192,7 +2308,7 @@ window.RESOURCES = [
     var policiesCard = '<section class="card" aria-labelledby="pol"><div class="card-head"><h2 id="pol">Policies</h2><a href="#/submit?type=personal">Quote another line</a></div><div class="tablewrap"><table><thead><tr><th scope="col">Policy</th><th scope="col">Term</th><th scope="col">Annual premium</th><th scope="col">Status</th><th scope="col"><span class="sr-only">Actions</span></th></tr></thead><tbody>' +
       m.policies.map(function (p) {
         var veh = p.vehicles ? '<div class="small muted">' + p.vehicles.map(function (v) { return v.year + ' ' + v.make + ' ' + v.model; }).join(', ') + '</div>' : '';
-        return '<tr><td><div class="titleline">' + esc(p.name) + '</div><div class="small muted">' + esc(p.id) + '</div>' + veh + '</td><td>' + esc(p.term) + '</td><td>' + money(p.premium) + '</td><td>' + statusTag(p.status) + '</td><td style="text-align:right"><a href="#/change/' + m.id + '?policy=' + p.id + '">Change</a></td></tr>';
+        return '<tr><td><div class="titleline">' + esc(p.name) + '</div><div class="small muted">' + esc(p.id) + ' <span class="tag ' + CAT_TONE[p.category] + '" style="margin-left:4px">' + CAT_LABEL[p.category] + '</span></div>' + veh + '</td><td>' + esc(p.term) + '</td><td>' + money(p.premium) + '</td><td>' + statusTag(p.status) + '</td><td style="text-align:right"><a href="#/change/' + m.id + '?policy=' + p.id + '">Change</a></td></tr>';
       }).join('') + '</tbody></table></div></section>';
     var claimsCard = '<section class="card card-pad" aria-labelledby="clm"><div class="row" style="justify-content:space-between"><h2 id="clm">Claims</h2><a href="#/claims?member=' + m.id + '">Report a claim</a></div>' +
       (m.claims.length ? m.claims.map(function (c) {
@@ -2224,7 +2340,7 @@ window.RESOURCES = [
       (m.alert.kind === 'lapse' ? '<div class="row"><button type="button" class="linkbtn" data-act="paylink" style="color:var(--orange)">Text a pay link to ' + esc(m.contact) + '</button><button type="button" class="linkbtn" data-act="pay" style="color:var(--orange)">Take payment now</button></div>' : '') + '</div>' : '';
     main.innerHTML = '<nav aria-label="Breadcrumb" class="small muted"><a href="#/book">Book of business</a> / ' + esc(m.name) + '</nav>' +
       '<div class="pagehead"><div><h1>' + esc(m.name) + '</h1><div class="row muted" style="margin-top:6px;gap:6px 16px"><span>Member since ' + m.since + '</span><span>' + esc(m.city) + '</span><span>' + esc(m.phone) + '</span><span>' + esc(m.email) + '</span></div>' +
-      '<div class="row" style="margin-top:10px;gap:8px"><span class="pill tag green">' + m.policies.length + ' ' + (m.policies.length === 1 ? 'policy' : 'policies') + '</span>' + (m.paperless ? '<span class="pill tag green">Paperless</span>' : '') + '<span class="pill tag gray">' + (m.easyPay ? 'On Easy Pay' : 'Not on Easy Pay') + '</span></div></div>' +
+      '<div class="row" style="margin-top:10px;gap:8px">' + Object.keys(m.policies.reduce(function (o, p) { o[p.category] = 1; return o; }, {})).map(function (c) { return '<span class="tag ' + CAT_TONE[c] + '">' + CAT_LABEL[c] + '</span>'; }).join('') + '<span class="pill tag gray">' + m.policies.length + ' ' + (m.policies.length === 1 ? 'policy' : 'policies') + '</span>' + (m.paperless ? '<span class="pill tag gray">Paperless</span>' : '') + '<span class="pill tag gray">' + (m.easyPay ? 'On Easy Pay' : 'Not on Easy Pay') + '</span></div></div>' +
       '<div class="row"><button type="button" class="btn" data-act="pay">Take payment</button><a class="btn secondary" href="#/change/' + m.id + '">Request a change</a><a class="btn secondary" href="#/claims?member=' + m.id + '">Report a claim</a><button type="button" class="btn secondary" data-act="upload">Upload document</button></div></div>' +
       alert +
       '<div class="tabs" role="tablist" aria-label="Member sections">' + tabs.map(function (t) { return '<button type="button" role="tab" aria-selected="' + (t[0] === tab) + '" data-tab="' + t[0] + '">' + t[1] + '</button>'; }).join('') + '</div>' +
