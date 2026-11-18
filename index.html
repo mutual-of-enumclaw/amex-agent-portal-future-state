@@ -372,6 +372,17 @@ window.NEWS = [
   { date: 'Personal lines, WA', tags: '', title: 'Enhanced Advanced Quote Discount now in Washington' }
 ];
 
+// Sample book metrics for the demo (fictional). In production these come from the Agency Effectiveness Scorecard.
+window.BOOK = {
+  asOf: 'October 2026',
+  metrics: [
+    { label: 'Written premium, YTD', value: '$4,812,350', change: 'Up 6.2% from last year', good: true },
+    { label: 'Policies in force', value: '3,146', change: '118 more than in January', good: true },
+    { label: 'Retention', value: '87.4%', change: 'Up 1.1 points from last year', good: true },
+    { label: 'Loss ratio', value: '52.1%', change: 'Down 3.4 points from last year', good: true }
+  ]
+};
+
 // Generated from the pa1 site inventory (Nov 2026). Titles only; no internal URLs.
 window.RESOURCES = [
  {
@@ -2077,6 +2088,13 @@ window.RESOURCES = [
   }
 
   // ---------- Views ----------
+  function metricsHtml() {
+    return window.BOOK.metrics.map(function (k) {
+      return '<div class="metric"><div class="small muted">' + esc(k.label) + '</div><div class="v">' + esc(k.value) + '</div>' +
+        '<div class="small" style="font-weight:600;color:' + (k.good ? 'var(--green)' : 'var(--red)') + '">' + esc(k.change) + '</div></div>';
+    }).join('');
+  }
+
   var views = {};
 
   views.today = function () {
@@ -2104,8 +2122,8 @@ window.RESOURCES = [
       '<div class="cols"><div class="col-main">' +
       '<section class="card" aria-labelledby="attn"><div class="card-head"><h2 id="attn">Needs your attention</h2><div class="row" role="group" aria-label="Filter items">' + chips + '</div></div>' +
       '<ul class="list">' + list + '</ul></section>' +
-      '<section class="card card-pad" aria-labelledby="book"><div class="row" style="justify-content:space-between"><h2 id="book">Your book at a glance</h2><span class="small muted">From your Agency Effectiveness Scorecard, updated monthly</span></div>' +
-      '<div class="grid4" style="margin-top:16px"><div class="metric"><div class="small muted">Written premium, YTD</div><div class="v">[$ amount]</div></div><div class="metric"><div class="small muted">Policies in force</div><div class="v">[count]</div></div><div class="metric"><div class="small muted">Retention</div><div class="v">[%]</div></div><div class="metric"><div class="small muted">Loss ratio</div><div class="v">[%]</div></div></div>' +
+      '<section class="card card-pad" aria-labelledby="book"><div class="row" style="justify-content:space-between"><h2 id="book">Your book at a glance</h2><span class="small muted">Agency Effectiveness Scorecard, ' + esc(window.BOOK.asOf) + '. Sample data.</span></div>' +
+      '<div class="grid4" style="margin-top:16px">' + metricsHtml() + '</div>' +
       '<div class="row" style="margin-top:14px"><a href="#/performance">Loss runs</a><a href="#/performance">Commission statements</a><a href="#/performance">Agency billing statements</a></div></section>' +
       '</div><aside class="col-side">' +
       '<section class="card card-pad" aria-labelledby="start"><h2 id="start" style="margin-bottom:12px">Start something</h2><div class="stack">' +
@@ -2426,9 +2444,9 @@ window.RESOURCES = [
   views.performance = function () {
     var reports = ['Agency Effectiveness Scorecard', 'Agency production and loss ratio', 'Loss run', 'Commission statements', 'Customer email addresses', 'Net Promoter Score and member comments', 'Agency billing statements'];
     main.innerHTML = '<div class="pagehead"><div><h1>Agency performance</h1><p class="lede">Your numbers and monthly reports in one place.</p></div></div>' +
-      '<div class="grid4"><div class="metric"><div class="small muted">Written premium, YTD</div><div class="v">[$ amount]</div></div><div class="metric"><div class="small muted">Policies in force</div><div class="v">[count]</div></div><div class="metric"><div class="small muted">Retention</div><div class="v">[%]</div></div><div class="metric"><div class="small muted">Loss ratio</div><div class="v">[%]</div></div></div>' +
+      '<p class="small muted">Agency Effectiveness Scorecard, ' + esc(window.BOOK.asOf) + '. Sample data.</p><div class="grid4">' + metricsHtml() + '</div>' +
       '<section class="card" aria-labelledby="rep"><div class="card-head"><h2 id="rep">Reports</h2></div><ul class="list">' + reports.map(function (r) { return '<li><div class="grow titleline">' + r + '</div><button type="button" class="btn sm secondary" data-rep="' + r + '">Open</button></li>'; }).join('') + '</ul></section>' +
-      '<p class="small muted">Bracketed values stand in for live agency data.</p>';
+      '';
     $all('[data-rep]').forEach(function (b) { b.addEventListener('click', function () { toast(b.dataset.rep + ' opens here (demo).'); }); });
   };
 
